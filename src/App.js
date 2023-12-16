@@ -15,14 +15,23 @@ import Geography from "./scenes/geography";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
 import Calendar from "./scenes/calendar/calendar";
+import LoginPage from "./scenes/login/LoginPage";
 
 function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
+  const [isLoginSuccessfull, setLoginSuccessfull] = useState(false);
+
+  const checkLoginStatus = () =>{
+    setLoginSuccessfull(true);
+  }
 
   return (
+    
     <ColorModeContext.Provider value={colorMode}>
-      <ThemeProvider theme={theme}>
+     {!isLoginSuccessfull ?(<LoginPage/>):
+
+      (<ThemeProvider theme={theme}>
         <CssBaseline />
         <div className="app">
           <Sidebar isSidebar={isSidebar} />
@@ -43,7 +52,7 @@ function App() {
             </Routes>
           </main>
         </div>
-      </ThemeProvider>
+      </ThemeProvider>)}
     </ColorModeContext.Provider>
   );
 }
