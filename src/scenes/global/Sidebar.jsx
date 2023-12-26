@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { HomeIcon, DashboardIcon } from "../../Icons/Icons";
+import { HomeIcon, DashboardIcon, AdminIcon, ClientIcon, ReportsIcon, LegalEntityIcon } from "../../Icons/Icons";
 
 const Container = styled.div`
   background: #1F2A40;
@@ -17,7 +17,7 @@ const Container = styled.div`
 
 const MenuItem = styled.div`
   display: grid;
-  grid-template-columns: ${({ isCollapsed }) => (isCollapsed ? "1fr" : "20% 70% 10%")};
+  grid-template-columns: ${({ isCollapsed }) => (!isCollapsed ? "20% 70% 10%" : " 1fr" )};
   align-items: center;
   padding: 10px;
   text-align: center;
@@ -25,7 +25,7 @@ const MenuItem = styled.div`
   cursor: pointer;
   background-color: ${({ selected }) => (selected ? "#1F2A40" : "transparent")};
   &:hover {
-    background-color: #1F2A40;
+    background-color: #aaafb7;
   }
 `;
 
@@ -52,7 +52,7 @@ const SubMenuItem = styled.div`
   padding-left: 20px;
   background-color: ${({ selected }) => (selected ? "#1F2A40" : "transparent")};
   &:hover {
-    background-color: #1F2A40;
+    background-color: #aaafb7;
   }
 `;
 
@@ -82,9 +82,9 @@ const Sidebar = () => {
 
     return (
       <>
-        <MenuItem selected={selected} onClick={() => toggleDataMenu(titleName)}>
+        <MenuItem selected={selected} onClick={() => toggleDataMenu(titleName)} isCollapsed={isCollapsed}>
           <ExpandIconContainer>
-            <DashboardIcon />
+          {Icon}
           </ExpandIconContainer>
           {!isCollapsed && (
             <>
@@ -113,9 +113,18 @@ const Sidebar = () => {
 
   return (
     <Container isCollapsed={isCollapsed}>
-      <MenuItem onClick={toggleCollapse}>
-        {isCollapsed ? "☰" : "✕"}
-      </MenuItem>
+      
+      <MenuItem onClick={toggleCollapse} isCollapsed={isCollapsed}>
+       {isCollapsed && <ExpandIconContainer>
+            ☰
+          </ExpandIconContainer>}
+          {!isCollapsed && (
+            <>
+              <TextContainer>Infi Port</TextContainer>
+              <ExpandIconContainerRight >
+               {isCollapsed ? "☰" : "✕"}
+              </ExpandIconContainerRight></>)}
+        </MenuItem>
 
 
       <MainMenuItem
@@ -126,6 +135,7 @@ const Sidebar = () => {
         ]}
         toggleDataMenu={() => toggleDataMenu("Dashboard")}
         titleName={"Dashboard"}
+        Icon={<DashboardIcon/>}
       />
 
       <MainMenuItem
@@ -136,6 +146,7 @@ const Sidebar = () => {
         ]}
         toggleDataMenu={() => toggleDataMenu("Admin")}
         titleName={"Admin"}
+        Icon={<AdminIcon/>}
       />
 
       <MainMenuItem
@@ -147,6 +158,7 @@ const Sidebar = () => {
         ]}
         toggleDataMenu={() => toggleDataMenu("Client Name")}
         titleName={"Client Name"}
+        Icon={<ClientIcon/>}
       />
 
       <MainMenuItem
@@ -158,6 +170,7 @@ const Sidebar = () => {
         ]}
         toggleDataMenu={() => toggleDataMenu("Reports")}
         titleName={"Reports"}
+        Icon={<ReportsIcon/>}
       />
 
       <MainMenuItem
@@ -167,6 +180,7 @@ const Sidebar = () => {
         ]}
         toggleDataMenu={() => toggleDataMenu("Legal Entity")}
         titleName={"Legal Entity"}
+        Icon={<LegalEntityIcon/>}
       />
 
     </Container>
