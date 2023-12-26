@@ -5,9 +5,9 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { HomeIcon, DashboardIcon } from "../../Icons/Icons";
 
 const Container = styled.div`
-  background: #2196F3;
+  background: #1F2A40;
   height: 100vh;
-  width: ${({ isCollapsed }) => (isCollapsed ? "60px" : "331px")};
+  width: ${({ isCollapsed }) => (isCollapsed ? "60px" : "300px")};
   overflow-x: hidden;
   transition: 0.5s;
   display: flex;
@@ -17,15 +17,15 @@ const Container = styled.div`
 
 const MenuItem = styled.div`
   display: grid;
-  grid-template-columns: 20% 70% 10%;
+  grid-template-columns: ${({ isCollapsed }) => (isCollapsed ? "1fr" : "20% 70% 10%")};
   align-items: center;
   padding: 10px;
   text-align: center;
   font-size: 20px;
   cursor: pointer;
-  background-color: ${({ selected }) => (selected ? "#0D47A1" : "transparent")};
+  background-color: ${({ selected }) => (selected ? "#1F2A40" : "transparent")};
   &:hover {
-    background-color: #0D47A1;
+    background-color: #1F2A40;
   }
 `;
 
@@ -50,45 +50,56 @@ const ExpandIconContainerRight = styled.div`
 
 const SubMenuItem = styled.div`
   padding-left: 20px;
-  background-color: ${({ selected }) => (selected ? "#0D47A1" : "transparent")};
+  background-color: ${({ selected }) => (selected ? "#1F2A40" : "transparent")};
   &:hover {
-    background-color: #0D47A1;
+    background-color: #1F2A40;
   }
 `;
 
 const Sidebar = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
-  const [isDataMenuOpen, setIsDataMenuOpen] = useState(false);
+  const [dataMenuStates, setDataMenuStates] = useState({
+    Dashboard: false,
+    Admin: false,
+    "Client Name": false,
+    Reports: false,
+    "Legal Entity": false
+  });
 
   const toggleCollapse = () => {
     setIsCollapsed(!isCollapsed);
   };
 
-  const toggleDataMenu = () => {
-    setIsDataMenuOpen(!isDataMenuOpen);
+  const toggleDataMenu = (menuKey) => {
+    setDataMenuStates((prevState) => ({
+      ...prevState,
+      [menuKey]: !prevState[menuKey],
+    }));
   };
 
-  const MainMenuItem = ({ items, toggleDataMenu, titleName, isDataMenuOpen }) => {
+  const MainMenuItem = ({ items, toggleDataMenu, titleName, isDataMenuOpen, Icon }) => {
 
     return (
       <>
-        <MenuItem selected={selected} onClick={toggleDataMenu}>
+        <MenuItem selected={selected} onClick={() => toggleDataMenu(titleName)}>
           <ExpandIconContainer>
-            <HomeIcon />
+            <DashboardIcon />
           </ExpandIconContainer>
-          <TextContainer>{titleName}</TextContainer>
-          <ExpandIconContainerRight >
-            {isDataMenuOpen ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-          </ExpandIconContainerRight>
+          {!isCollapsed && (
+            <>
+              <TextContainer>{titleName}</TextContainer>
+              <ExpandIconContainerRight >
+                {isDataMenuOpen ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+              </ExpandIconContainerRight></>)}
         </MenuItem>
 
-        {isDataMenuOpen && (
+        {dataMenuStates[titleName] && (
           <>
             {items.map((item) => (
               <SubMenuItem
-                selected={selected === "Manage Team"}
-                onClick={() => setSelected("Manage Team")}
+                selected={selected === item.title}
+                onClick={() => setSelected(item.title)}
               >
                 {item.title}
               </SubMenuItem>))}
@@ -113,9 +124,8 @@ const Sidebar = () => {
           { title: "Record", to: "/contacts" },
           { title: "Daily Task", to: "/invoices" },
         ]}
-        toggleDataMenu={toggleDataMenu}
+        toggleDataMenu={() => toggleDataMenu("Dashboard")}
         titleName={"Dashboard"}
-        isDataMenuOpen={isDataMenuOpen}
       />
 
       <MainMenuItem
@@ -124,9 +134,8 @@ const Sidebar = () => {
           { title: "Create User", to: "/contacts" },
           { title: "Manage User", to: "/invoices" },
         ]}
-        toggleDataMenu={toggleDataMenu}
+        toggleDataMenu={() => toggleDataMenu("Admin")}
         titleName={"Admin"}
-        isDataMenuOpen={isDataMenuOpen}
       />
 
       <MainMenuItem
@@ -136,9 +145,8 @@ const Sidebar = () => {
           { title: "Create User", to: "/invoices" },
           { title: "Manage User", to: "/invoices" },
         ]}
-        toggleDataMenu={toggleDataMenu}
+        toggleDataMenu={() => toggleDataMenu("Client Name")}
         titleName={"Client Name"}
-        isDataMenuOpen={isDataMenuOpen}
       />
 
       <MainMenuItem
@@ -148,42 +156,19 @@ const Sidebar = () => {
           { title: "Financial Reports", to: "/invoices" },
           { title: "Regulatory Reports", to: "/invoices" },
         ]}
-        toggleDataMenu={toggleDataMenu}
+        toggleDataMenu={() => toggleDataMenu("Reports")}
         titleName={"Reports"}
-        isDataMenuOpen={isDataMenuOpen}
       />
 
       <MainMenuItem
         items={[
-          { title: "Company Detail", to: "/team" },
-          { title: "All User", to: "/contacts" },
-          { title: "Create User", to: "/invoices" },
-          { title: "Manage User", to: "/invoices" },
-        ]}
-        toggleDataMenu={toggleDataMenu}
-        titleName={"Client Name"}
-        isDataMenuOpen={isDataMenuOpen}
-      />
-      
-      <MainMenuItem
-        items={[
           { title: "Fund Structure", to: "/team" },
           { title: "Legal Entity", to: "/contacts" }
         ]}
-        toggleDataMenu={toggleDataMenu}
+        toggleDataMenu={() => toggleDataMenu("Legal Entity")}
         titleName={"Legal Entity"}
-        isDataMenuOpen={isDataMenuOpen}
-      /> 
-      
-      <MainMenuItem
-        items={[
-          { title: "Fund Structure", to: "/team" },
-          { title: "Legal Entity", to: "/contacts" }
-        ]}
-        toggleDataMenu={toggleDataMenu}
-        titleName={"Reconciliation"}
-        isDataMenuOpen={isDataMenuOpen}
       />
+
     </Container>
   );
 };
