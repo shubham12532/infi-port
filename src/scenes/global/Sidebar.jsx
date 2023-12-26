@@ -1,227 +1,190 @@
-import { useState } from "react";
-import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
-import { Box, IconButton, Typography, useTheme } from "@mui/material";
-import { Link } from "react-router-dom";
-import "react-pro-sidebar/dist/css/styles.css";
-import { tokens } from "../../theme";
-import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
-import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
-import ReceiptOutlinedIcon from "@mui/icons-material/ReceiptOutlined";
-import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
-import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
-import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
-import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
-import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutlined";
-import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
-import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
+import React, { useState } from "react";
+import styled from "styled-components";
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { HomeIcon, DashboardIcon } from "../../Icons/Icons";
 
-const Item = ({ title, to, icon, selected, setSelected }) => {
-  const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
-  return (
-    <MenuItem
-      active={selected === title}
-      style={{
-        color: colors.grey[100],
-      }}
-      onClick={() => setSelected(title)}
-      icon={icon}
-    >
-      <Typography>{title}</Typography>
-      <Link to={to} />
-    </MenuItem>
-  );
-};
+const Container = styled.div`
+  background: #2196F3;
+  height: 100vh;
+  width: ${({ isCollapsed }) => (isCollapsed ? "60px" : "331px")};
+  overflow-x: hidden;
+  transition: 0.5s;
+  display: flex;
+  flex-direction: column;
+  color: white;
+`;
+
+const MenuItem = styled.div`
+  display: grid;
+  grid-template-columns: 20% 70% 10%;
+  align-items: center;
+  padding: 10px;
+  text-align: center;
+  font-size: 20px;
+  cursor: pointer;
+  background-color: ${({ selected }) => (selected ? "#0D47A1" : "transparent")};
+  &:hover {
+    background-color: #0D47A1;
+  }
+`;
+
+const ExpandIconContainer = styled.div`
+  grid-column: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const TextContainer = styled.div`
+  grid-column: 2;
+  text-align: left;
+`;
+
+const ExpandIconContainerRight = styled.div`
+  grid-column: 3
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const SubMenuItem = styled.div`
+  padding-left: 20px;
+  background-color: ${({ selected }) => (selected ? "#0D47A1" : "transparent")};
+  &:hover {
+    background-color: #0D47A1;
+  }
+`;
 
 const Sidebar = () => {
-  const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
+  const [isDataMenuOpen, setIsDataMenuOpen] = useState(false);
+
+  const toggleCollapse = () => {
+    setIsCollapsed(!isCollapsed);
+  };
+
+  const toggleDataMenu = () => {
+    setIsDataMenuOpen(!isDataMenuOpen);
+  };
+
+  const MainMenuItem = ({ items, toggleDataMenu, titleName, isDataMenuOpen }) => {
+
+    return (
+      <>
+        <MenuItem selected={selected} onClick={toggleDataMenu}>
+          <ExpandIconContainer>
+            <HomeIcon />
+          </ExpandIconContainer>
+          <TextContainer>{titleName}</TextContainer>
+          <ExpandIconContainerRight >
+            {isDataMenuOpen ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+          </ExpandIconContainerRight>
+        </MenuItem>
+
+        {isDataMenuOpen && (
+          <>
+            {items.map((item) => (
+              <SubMenuItem
+                selected={selected === "Manage Team"}
+                onClick={() => setSelected("Manage Team")}
+              >
+                {item.title}
+              </SubMenuItem>))}
+          </>
+        )}
+
+      </>
+    );
+
+  };
 
   return (
-    <Box
-      sx={{
-        "& .pro-sidebar-inner": {
-          background: `${colors.primary[400]} !important`,
-        },
-        "& .pro-icon-wrapper": {
-          backgroundColor: "transparent !important",
-        },
-        "& .pro-inner-item": {
-          padding: "5px 35px 5px 20px !important",
-        },
-        "& .pro-inner-item:hover": {
-          color: "#868dfb !important",
-        },
-        "& .pro-menu-item.active": {
-          color: "#6870fa !important",
-        },
-      }}
-    >
-      <ProSidebar collapsed={isCollapsed}>
-        <Menu iconShape="square">
-          {/* LOGO AND MENU ICON */}
-          <MenuItem
-            onClick={() => setIsCollapsed(!isCollapsed)}
-            icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
-            style={{
-              margin: "10px 0 20px 0",
-              color: colors.grey[100],
-            }}
-          >
-            {!isCollapsed && (
-              <Box
-                display="flex"
-                justifyContent="space-between"
-                alignItems="center"
-                ml="15px"
-              >
-                <Typography variant="h3" color={colors.grey[100]}>
-                  ADMINIS
-                </Typography>
-                <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
-                  <MenuOutlinedIcon />
-                </IconButton>
-              </Box>
-            )}
-          </MenuItem>
+    <Container isCollapsed={isCollapsed}>
+      <MenuItem onClick={toggleCollapse}>
+        {isCollapsed ? "☰" : "✕"}
+      </MenuItem>
 
-          {!isCollapsed && (
-            <Box mb="25px">
-              <Box display="flex" justifyContent="center" alignItems="center">
-                <img
-                  alt="profile-user"
-                  width="100px"
-                  height="100px"
-                  src={`../../assets/user.png`}
-                  style={{ cursor: "pointer", borderRadius: "50%" }}
-                />
-              </Box>
-              <Box textAlign="center">
-                <Typography
-                  variant="h2"
-                  color={colors.grey[100]}
-                  fontWeight="bold"
-                  sx={{ m: "10px 0 0 0" }}
-                >
-                  Ed Roh
-                </Typography>
-                <Typography variant="h5" color={colors.greenAccent[500]}>
-                  VP Fancy Admin
-                </Typography>
-              </Box>
-            </Box>
-          )}
 
-          <Box paddingLeft={isCollapsed ? undefined : "10%"}>
-            <Item
-              title="Dashboard"
-              to="/"
-              icon={<HomeOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
+      <MainMenuItem
+        items={[
+          { title: "Data", to: "/team" },
+          { title: "Record", to: "/contacts" },
+          { title: "Daily Task", to: "/invoices" },
+        ]}
+        toggleDataMenu={toggleDataMenu}
+        titleName={"Dashboard"}
+        isDataMenuOpen={isDataMenuOpen}
+      />
 
-            <Typography
-              variant="h6"
-              color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 20px" }}
-            >
-              Data
-            </Typography>
-            <Item
-              title="Manage Team"
-              to="/team"
-              icon={<PeopleOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Contacts Information"
-              to="/contacts"
-              icon={<ContactsOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Invoices Balances"
-              to="/invoices"
-              icon={<ReceiptOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
+      <MainMenuItem
+        items={[
+          { title: "All User", to: "/team" },
+          { title: "Create User", to: "/contacts" },
+          { title: "Manage User", to: "/invoices" },
+        ]}
+        toggleDataMenu={toggleDataMenu}
+        titleName={"Admin"}
+        isDataMenuOpen={isDataMenuOpen}
+      />
 
-            <Typography
-              variant="h6"
-              color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 20px" }}
-            >
-              Pages
-            </Typography>
-            <Item
-              title="Profile Form"
-              to="/form"
-              icon={<PersonOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Calendar"
-              to="/calendar"
-              icon={<CalendarTodayOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="FAQ Page"
-              to="/faq"
-              icon={<HelpOutlineOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
+      <MainMenuItem
+        items={[
+          { title: "Company Detail", to: "/team" },
+          { title: "All User", to: "/contacts" },
+          { title: "Create User", to: "/invoices" },
+          { title: "Manage User", to: "/invoices" },
+        ]}
+        toggleDataMenu={toggleDataMenu}
+        titleName={"Client Name"}
+        isDataMenuOpen={isDataMenuOpen}
+      />
 
-            <Typography
-              variant="h6"
-              color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 20px" }}
-            >
-              Charts
-            </Typography>
-            <Item
-              title="Bar Chart"
-              to="/bar"
-              icon={<BarChartOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Pie Chart"
-              to="/pie"
-              icon={<PieChartOutlineOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Line Chart"
-              to="/line"
-              icon={<TimelineOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Geography Chart"
-              to="/geography"
-              icon={<MapOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-          </Box>
-        </Menu>
-      </ProSidebar>
-    </Box>
+      <MainMenuItem
+        items={[
+          { title: "My Reports", to: "/team" },
+          { title: "Standard Reports", to: "/contacts" },
+          { title: "Financial Reports", to: "/invoices" },
+          { title: "Regulatory Reports", to: "/invoices" },
+        ]}
+        toggleDataMenu={toggleDataMenu}
+        titleName={"Reports"}
+        isDataMenuOpen={isDataMenuOpen}
+      />
+
+      <MainMenuItem
+        items={[
+          { title: "Company Detail", to: "/team" },
+          { title: "All User", to: "/contacts" },
+          { title: "Create User", to: "/invoices" },
+          { title: "Manage User", to: "/invoices" },
+        ]}
+        toggleDataMenu={toggleDataMenu}
+        titleName={"Client Name"}
+        isDataMenuOpen={isDataMenuOpen}
+      />
+      
+      <MainMenuItem
+        items={[
+          { title: "Fund Structure", to: "/team" },
+          { title: "Legal Entity", to: "/contacts" }
+        ]}
+        toggleDataMenu={toggleDataMenu}
+        titleName={"Legal Entity"}
+        isDataMenuOpen={isDataMenuOpen}
+      /> 
+      
+      <MainMenuItem
+        items={[
+          { title: "Fund Structure", to: "/team" },
+          { title: "Legal Entity", to: "/contacts" }
+        ]}
+        toggleDataMenu={toggleDataMenu}
+        titleName={"Reconciliation"}
+        isDataMenuOpen={isDataMenuOpen}
+      />
+    </Container>
   );
 };
 

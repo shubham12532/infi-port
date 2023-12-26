@@ -29,9 +29,9 @@ function App() {
   return (
     
     <ColorModeContext.Provider value={colorMode}>
-     {!isLoginSuccessfull ?(<LoginPage/>):
+     {/* {!isLoginSuccessfull ?(<LoginPage/>): */}
 
-      (<ThemeProvider theme={theme}>
+      <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className="app">
           <Sidebar isSidebar={isSidebar} />
@@ -52,7 +52,7 @@ function App() {
             </Routes>
           </main>
         </div>
-      </ThemeProvider>)}
+      </ThemeProvider>
     </ColorModeContext.Provider>
   );
 }
