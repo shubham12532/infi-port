@@ -3,6 +3,7 @@ import styled from "styled-components";
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { HomeIcon, DashboardIcon, AdminIcon, ClientIcon, ReportsIcon, LegalEntityIcon } from "../../Icons/Icons";
+import debounce from 'lodash.debounce';
 
 const Container = styled.div`
   background: #1F2A40;
@@ -70,15 +71,21 @@ const Sidebar = () => {
   const toggleCollapse = () => {
     setIsCollapsed(!isCollapsed);
   };
+  
+  const debouncedToggleCollapse = debounce(toggleCollapse, 300);
 
   const toggleDataMenu = (menuKey) => {
     setDataMenuStates((prevState) => ({
       ...prevState,
       [menuKey]: !prevState[menuKey],
     }));
+    if(isCollapsed)
+      setIsCollapsed(false)
+    else 
+      setIsCollapsed(false)
   };
 
-  const MainMenuItem = ({ items, toggleDataMenu, titleName, isDataMenuOpen, Icon }) => {
+  const MainMenuItem = ({ items, toggleDataMenu, titleName, isDataMenuOpen, Icon}) => {
 
     return (
       <>
@@ -114,7 +121,7 @@ const Sidebar = () => {
   return (
     <Container isCollapsed={isCollapsed}>
       
-      <MenuItem onClick={toggleCollapse} isCollapsed={isCollapsed}>
+      <MenuItem onClick={debouncedToggleCollapse} isCollapsed={isCollapsed}>
        {isCollapsed && <ExpandIconContainer>
             ☰
           </ExpandIconContainer>}
