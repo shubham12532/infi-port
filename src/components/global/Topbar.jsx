@@ -1,10 +1,13 @@
 // NavBar.js
 import React from 'react';
 import styled from 'styled-components';
+import { DownArrowIcon } from '../../Icons/Icons';
+import StaticDataFund from '../../Screens/Fund/StaticDataFund';
 
 const NavBarContainer = styled.div`
   background-color: #333;
   padding: 10px;
+  height: 55px;
 `;
 
 const Menu = styled.ul`
@@ -25,6 +28,7 @@ const MenuItem = styled.li`
 
 const SubMenu = styled.ul`
   display: none;
+  width: max-content;
   position: absolute;
   top: 100%;
   left: 0;
@@ -76,12 +80,23 @@ const SubSubMenuItem = styled.li`
   }
 `;
 
-const Topbar = () => {
+const Topbar = ({setSideBarOpen}) => {
+
+
   return (
     <NavBarContainer>
       <Menu>
         <MenuItem>
-          Home
+          Static Data
+          <SubMenu>
+            <SubMenuItem >Fund</SubMenuItem>
+            <SubMenuItem>Custodian</SubMenuItem>
+            <SubMenuItem>Broker</SubMenuItem>
+            <SubMenuItem>Exchange</SubMenuItem>
+            <SubMenuItem>Country</SubMenuItem>
+            <SubMenuItem>Price Source</SubMenuItem>
+            <SubMenuItem>Issuer</SubMenuItem>
+          </SubMenu>
         </MenuItem>
         <MenuItem>
           About
@@ -99,6 +114,9 @@ const Topbar = () => {
         </MenuItem>
         <MenuItem>
           Contact
+        </MenuItem>
+        <MenuItem onClick={setSideBarOpen} style={{marginLeft: "auto"}}>
+          <DownArrowIcon/>
         </MenuItem>
       </Menu>
     </NavBarContainer>
