@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { HomeIcon, DashboardIcon, AdminIcon, ClientIcon, ReportsIcon, LegalEntityIcon, LogoutIcon, DefaultImageIcon } from "../../Icons/Icons";
+import { HomeIcon, DashboardIcon, AdminIcon, ClientIcon, ReportsIcon, LegalEntityIcon, LogoutIcon, DefaultImageIcon, RightArrowButton } from "../../Icons/Icons";
 import debounce from 'lodash.debounce';
 
 const MainContainer = styled.div`
@@ -18,7 +18,9 @@ const MainContainer = styled.div`
   -moz-border-radius: 10px;
   border-radius: 10px;
   justify-content: space-between;
-  padding:  ${({ isCollapsed }) => (!isCollapsed && "18px")};
+  padding: ${({ isCollapsed }) => (!isCollapsed && "18px")};
+  position: fixed;
+  right: 0; /* Position the sidebar to the right */
 `;
 
 
@@ -100,14 +102,13 @@ const SubMenuItem = styled.div`
 `;
 
 const Seprator = styled.div`
-  height: 1px;
+  height: 2px;
   background-color: #f6f6f6;
   width: 100%;
   margin-bottom: 24px;
-
 `
 
-const Sidebar = () => {
+const Sidebar = ({isSidebarOpen}) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
   const [dataMenuStates, setDataMenuStates] = useState({
@@ -168,7 +169,8 @@ const Sidebar = () => {
   };
 
   return (
-    <MainContainer isCollapsed={isCollapsed}>
+    isSidebarOpen &&
+    (<MainContainer isCollapsed={isCollapsed}>
       <MenuItem selected={selected} onClick={debouncedToggleCollapse} isCollapsed={isCollapsed} style={{height:"70px"}}>
         <ExpandIconContainer>
           <DefaultImageIcon />
@@ -177,7 +179,7 @@ const Sidebar = () => {
           <>
             <TextContainer style={{ color: "#FF0000" }}>{"User Name"}</TextContainer>
             <ExpandIconContainerRight >
-            {isCollapsed ? "☰" : "✕"}
+            {isCollapsed ? "☰" : <RightArrowButton/>}
             </ExpandIconContainerRight>
           </>)}
       </MenuItem>
@@ -250,7 +252,7 @@ const Sidebar = () => {
             <ExpandIconContainerRight >
             </ExpandIconContainerRight></>)}
       </MenuItem>
-    </MainContainer>
+    </MainContainer>)
   );
 };
 
