@@ -32,7 +32,7 @@ function App() {
 
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <div className="app">
+        <div className="app" style={{overflow:'hidden'}}>
           <Sidebar isSidebarOpen={isSideBarOpen} />
           <main className="content">
             <Topbar setSideBarOpen={openSideBar} />
