@@ -1,7 +1,7 @@
-// Import necessary libraries
 import React from 'react';
 import styled from 'styled-components';
 import FundDashboard from './FundDashboard';
+import { useState } from 'react';
 
 // Styled components for form elements
 const FormContainer = styled.div`
@@ -9,20 +9,10 @@ const FormContainer = styled.div`
   padding: 10px;
   margin: 5px; /* Add margin from all sides */
   background-color: #d3d3d326;
-  // border: 1px solid grey;
 `;
 
 const MenuContainer = styled.div`
   padding: 6px;
-  // margin: 10px; /* Add margin from all sides */
-  // background-color: #d3d3d326;
-  // border: 1px solid grey;
-`;
-
-const Input = styled.input`
-  width: 100%;
-  margin-bottom: 10px;
-  padding: 8px;
 `;
 
 const Button = styled.button`
@@ -32,26 +22,52 @@ const Button = styled.button`
   border: 0px solid grey;
 
   &:hover {
-    background-color:#87CEEB;
+    background-color: #87CEEB;
   }
 `;
 
 // Your form component with multiple fields
 const StaticDataFund = () => {
-  
+  const [menuFromOption, setMenuFromOption] = useState({
+    FundDashboard: false,
+    fundInformation: false,
+    openPosition: false,
+    transaction: false,
+    deletedTransaction: false,
+    fundSetting: false,
+    performance: false,
+    custodyPosition: false,
+  });
+
   return (
     <FormContainer>
       <MenuContainer>
-      <Button>Fund Dashboard</Button>
-      <Button>Fund Information</Button>
-      <Button>Open Position</Button>
-      <Button>Transaction</Button>
-      <Button>Deleted Transaction</Button>
-      <Button>Fund Setting</Button>
-      <Button>Performance</Button>
-      <Button>Custody Position</Button>
+        <Button onClick={() => setMenuFromOption((prevMenu) => ({ ...prevMenu, FundDashboard: true }))}>
+          Fund Dashboard
+        </Button>
+        <Button onClick={() => setMenuFromOption((prevMenu) => ({ ...prevMenu, fundInformation: true }))}>
+          Fund Information
+        </Button>
+        <Button onClick={() => setMenuFromOption((prevMenu) => ({ ...prevMenu, openPosition: true }))}>
+          Open Position
+        </Button>
+        <Button onClick={() => setMenuFromOption((prevMenu) => ({ ...prevMenu, transaction: true }))}>
+          Transaction
+        </Button>
+        <Button onClick={() => setMenuFromOption((prevMenu) => ({ ...prevMenu, deletedTransaction: true }))}>
+          Deleted Transaction
+        </Button>
+        <Button onClick={() => setMenuFromOption((prevMenu) => ({ ...prevMenu, fundSetting: true }))}>
+          Fund Setting
+        </Button>
+        <Button onClick={() => setMenuFromOption((prevMenu) => ({ ...prevMenu, performance: true }))}>
+          Performance
+        </Button>
+        <Button onClick={() => setMenuFromOption((prevMenu) => ({ ...prevMenu, custodyPosition: true }))}>
+          Custody Position
+        </Button>
       </MenuContainer>
-      <FundDashboard/>
+      {menuFromOption.FundDashboard && <FundDashboard />}
     </FormContainer>
   );
 };
