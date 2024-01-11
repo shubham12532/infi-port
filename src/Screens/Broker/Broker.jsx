@@ -6,6 +6,7 @@ const Broker = () => {
   return (
     <GridContainer>
       <Column>
+        <TitleContainer>Broker</TitleContainer>
         <Input type="text" placeholder="Broker Name" />
         <Input type="text" placeholder="Broker code" />
         <Input type="text" placeholder="Broker Cotact" />
@@ -60,6 +61,16 @@ const Button = styled.button`
   &:hover {
     background-color: #2980b9;
   }
+`;
+
+
+const TitleContainer = styled.div`
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  text-align: center;
+  color: black;
+  font-size: 20px;
 `;
 
 const Input = styled.input`
