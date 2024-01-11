@@ -5,6 +5,7 @@ import Sidebar from "./components/global/Sidebar";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
 import StaticDataFund from "./Screens/Fund/StaticDataFund";
+import Broker from "./Screens/Broker/Broker";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -37,7 +38,7 @@ function App() {
           <main className="content">
             <Topbar setSideBarOpen={openSideBar} />
             <Routes>
-              <Route path="/" element={<StaticDataFund />} />
+              <Route path="/" element={<Broker />} />
             </Routes>
           </main>
         </div>
