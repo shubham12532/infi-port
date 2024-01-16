@@ -2,19 +2,16 @@ import React from 'react';
 import styled from 'styled-components';
 import { useState } from 'react';
 
-const CounterParty = () => {
+const Currency = () => {
   return (
     <GridContainer>
       <Column>
-        <TitleContainer>Counterparty</TitleContainer>
-        <Input type="text" placeholder="Counterparty Name" />
-        <Input type="text" placeholder="Counterparty Code" />
-        <Input type="text" placeholder="User Define Tag1" />
-        <Input type="text" placeholder="User Define Tag2" />
-        <Input type="text" placeholder="User Define Tag3" />
-        <Input type="text" placeholder="User Define Tag4" />
-        <Input type="text" placeholder="User Define Tag5" />
-        <Input type="text" placeholder="Last Modification Date" />
+        <TitleContainer>Currency</TitleContainer>
+        <Input type="text" placeholder="Country"/>
+        <Input type="text" placeholder="Currency"/>
+        <Input type="text" placeholder="Currency Code" />
+        <Input type="text" placeholder="Symbol" />
+        <Input type="date" placeholder="Last Modification Date" />
         <ActionButtonsContainer>
           <Button>Add New</Button>
           <Button>Edit</Button>
@@ -78,4 +75,4 @@ const Input = styled.input`
   margin-bottom: 10px;
 `;
 
-export default CounterParty;
+export default Currency;

@@ -2,13 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 import { useState } from 'react';
 
-const CounterParty = () => {
+const Country = () => {
   return (
     <GridContainer>
       <Column>
         <TitleContainer>Counterparty</TitleContainer>
-        <Input type="text" placeholder="Counterparty Name" />
-        <Input type="text" placeholder="Counterparty Code" />
+        <Input type="text" placeholder="Country Name" />
+        <Input type="text" placeholder="Country Code" />
+        <Input type="text" placeholder="Country Region" />
         <Input type="text" placeholder="User Define Tag1" />
         <Input type="text" placeholder="User Define Tag2" />
         <Input type="text" placeholder="User Define Tag3" />
@@ -78,4 +79,4 @@ const Input = styled.input`
   margin-bottom: 10px;
 `;
 
-export default CounterParty;
+export default Country;

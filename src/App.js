@@ -6,6 +6,7 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
 import StaticDataFund from "./Screens/Fund/StaticDataFund";
 import Broker from "./Screens/Broker/Broker";
+import CounterParty from "./Screens/CounterParty/CounterParty";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -38,7 +39,7 @@ function App() {
           <main className="content">
             <Topbar setSideBarOpen={openSideBar} />
             <Routes>
-              <Route path="/" element={<Broker />} />
+              <Route path="/" element={<CounterParty />} />
             </Routes>
           </main>
         </div>
