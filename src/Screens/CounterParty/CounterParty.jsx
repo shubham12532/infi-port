@@ -2,6 +2,21 @@ import React from 'react';
 import styled from 'styled-components';
 import { useState } from 'react';
 
+const columns = [
+  // Define your columns here
+  { Header: 'Name', accessor: 'name' },
+  { Header: 'Age', accessor: 'age' },
+  // Add more columns as needed
+];
+
+const data = [
+  // Your data goes here
+  { name: 'John Doe', age: 25 },
+  { name: 'Jane Doe', age: 30 },
+  // Add more data as needed
+];
+
+
 const CounterParty = () => {
   return (
     <GridContainer>
@@ -23,7 +38,8 @@ const CounterParty = () => {
           <Button>Audit Log</Button>
         </ActionButtonsContainer>
       </Column>
-      <Column></Column>
+      <Column>
+      </Column>
     </GridContainer>
   );
 };
