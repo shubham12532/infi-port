@@ -6,6 +6,8 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
 import StaticDataFund from "./Screens/Fund/StaticDataFund";
 import Broker from "./Screens/Broker/Broker";
+import CounterParty from "./Screens/CounterParty/CounterParty";
+import LoginPage from "./Screens/login/LoginPage";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -29,20 +31,20 @@ function App() {
   return (
     
     <ColorModeContext.Provider value={colorMode}>
-     {/* {!isLoginSuccessfull ?(<LoginPage/>): */}
+     {!isLoginSuccessfull ?(<LoginPage/>):
 
-      <ThemeProvider theme={theme}>
+      (<ThemeProvider theme={theme}>
         <CssBaseline />
         <div className="app" style={{overflow:'hidden'}}>
           <Sidebar isSidebarOpen={isSideBarOpen} />
           <main className="content">
             <Topbar setSideBarOpen={openSideBar} />
             <Routes>
-              <Route path="/" element={<Broker />} />
+              <Route path="/" element={<LoginPage />} />
             </Routes>
           </main>
         </div>
-      </ThemeProvider>
+      </ThemeProvider>)}
     </ColorModeContext.Provider>
   );
 }

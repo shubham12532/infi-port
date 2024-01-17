@@ -2,19 +2,15 @@ import React from 'react';
 import styled from 'styled-components';
 import { useState } from 'react';
 
-const Broker = () => {
+const Currency = () => {
   return (
     <GridContainer>
       <Column>
-        <TitleContainer>Broker</TitleContainer>
-        <Input type="text" placeholder="Broker Name" />
-        <Input type="text" placeholder="Broker code" />
-        <Input type="text" placeholder="Broker Cotact" />
-        <Input type="text" placeholder="Broker Email Id" />
-        <Input type="text" placeholder="User Define Tag1" />
-        <Input type="text" placeholder="User Define Tag2" />
-        <Input type="text" placeholder="User Define Tag3" />
-        <Input type="text" placeholder="User Define Tag4" />
+        <TitleContainer>Currency</TitleContainer>
+        <Input type="text" placeholder="Country"/>
+        <Input type="text" placeholder="Currency"/>
+        <Input type="text" placeholder="Currency Code" />
+        <Input type="text" placeholder="Symbol" />
         <Input type="date" placeholder="Last Modification Date" />
         <ActionButtonsContainer>
           <Button>Add New</Button>
@@ -63,7 +59,6 @@ const Button = styled.button`
   }
 `;
 
-
 const TitleContainer = styled.div`
   width: 100%;
   padding: 8px;
@@ -73,10 +68,11 @@ const TitleContainer = styled.div`
   font-size: 20px;
 `;
 
+
 const Input = styled.input`
   width: 100%;
   padding: 8px;
   margin-bottom: 10px;
 `;
 
-export default Broker;
+export default Currency;

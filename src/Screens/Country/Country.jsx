@@ -2,20 +2,20 @@ import React from 'react';
 import styled from 'styled-components';
 import { useState } from 'react';
 
-const Broker = () => {
+const Country = () => {
   return (
     <GridContainer>
       <Column>
-        <TitleContainer>Broker</TitleContainer>
-        <Input type="text" placeholder="Broker Name" />
-        <Input type="text" placeholder="Broker code" />
-        <Input type="text" placeholder="Broker Cotact" />
-        <Input type="text" placeholder="Broker Email Id" />
+        <TitleContainer>Counterparty</TitleContainer>
+        <Input type="text" placeholder="Country Name" />
+        <Input type="text" placeholder="Country Code" />
+        <Input type="text" placeholder="Country Region" />
         <Input type="text" placeholder="User Define Tag1" />
         <Input type="text" placeholder="User Define Tag2" />
         <Input type="text" placeholder="User Define Tag3" />
         <Input type="text" placeholder="User Define Tag4" />
-        <Input type="date" placeholder="Last Modification Date" />
+        <Input type="text" placeholder="User Define Tag5" />
+        <Input type="text" placeholder="Last Modification Date" />
         <ActionButtonsContainer>
           <Button>Add New</Button>
           <Button>Edit</Button>
@@ -63,7 +63,6 @@ const Button = styled.button`
   }
 `;
 
-
 const TitleContainer = styled.div`
   width: 100%;
   padding: 8px;
@@ -73,10 +72,11 @@ const TitleContainer = styled.div`
   font-size: 20px;
 `;
 
+
 const Input = styled.input`
   width: 100%;
   padding: 8px;
   margin-bottom: 10px;
 `;
 
-export default Broker;
+export default Country;
