@@ -31,7 +31,7 @@ function App() {
   return (
     
     <ColorModeContext.Provider value={colorMode}>
-     {!isLoginSuccessfull ?(<LoginPage/>):
+     {/* {!isLoginSuccessfull ?(<LoginPage/>): */}
 
       (<ThemeProvider theme={theme}>
         <CssBaseline />
@@ -40,11 +40,11 @@ function App() {
           <main className="content">
             <Topbar setSideBarOpen={openSideBar} />
             <Routes>
-              <Route path="/" element={<LoginPage />} />
+              <Route path="/" element={<CounterParty />} />
             </Routes>
           </main>
         </div>
-      </ThemeProvider>)}
+      </ThemeProvider>)
     </ColorModeContext.Provider>
   );
 }

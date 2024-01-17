@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import FundDashboard from './FundDashboard';
 import { useState } from 'react';
+import { Button } from '../../components/global/FormComponent';
 
 // Styled components for form elements
 const FormContainer = styled.div`
@@ -15,16 +16,7 @@ const MenuContainer = styled.div`
   padding: 6px;
 `;
 
-const Button = styled.button`
-  padding: 8px 16px;
-  margin-right: 10px;
-  cursor: pointer;
-  border: 0px solid grey;
 
-  &:hover {
-    background-color: #87CEEB;
-  }
-`;
 
 // Your form component with multiple fields
 const StaticDataFund = () => {

@@ -1,6 +1,7 @@
 // Import necessary libraries
 import React from 'react';
 import styled from 'styled-components';
+import { Input,Button } from '../../components/global/FormComponent';
 
 // Styled components for form elements
 const FormContainer = styled.div`
@@ -16,25 +17,6 @@ const Column = styled.div`
   display: grid;
   grid-template-rows: repeat(3, auto) 1fr;
   gap: 10px;
-`;
-
-const Input = styled.input`
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 10px;
-`;
-
-const Button = styled.button`
-  width: 100%;
-  padding: 10px;
-  cursor: pointer;
-  border: 0;
-  background-color: #3498db;
-  color: #fff;
-
-  &:hover {
-    background-color: #2980b9;
-  }
 `;
 
 const ActionButtonsContainer = styled.div`
