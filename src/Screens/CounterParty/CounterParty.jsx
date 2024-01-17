@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useState } from 'react';
+import { Input, Button } from '../../components/global/FormComponent';
 
 const columns = [
   // Define your columns here
@@ -65,19 +66,6 @@ const ActionButtonsContainer = styled.div`
   margin-top: 20px;
 `;
 
-const Button = styled.button`
-  width: 100%;
-  padding: 10px;
-  cursor: pointer;
-  border: 0;
-  background-color: #3498db;
-  color: #fff;
-
-  &:hover {
-    background-color: #2980b9;
-  }
-`;
-
 const TitleContainer = styled.div`
   width: 100%;
   padding: 8px;
@@ -85,13 +73,6 @@ const TitleContainer = styled.div`
   text-align: center;
   color: black;
   font-size: 20px;
-`;
-
-
-const Input = styled.input`
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 10px;
 `;
 
 export default CounterParty;
