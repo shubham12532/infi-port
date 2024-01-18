@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
-import { Input,Button } from '../../components/global/FormComponent';
+import { Input,Button,FormHeading } from '../../components/global/FormComponent';
 
 const Broker = () => {
 
@@ -29,6 +29,7 @@ const Broker = () => {
   return (
     <GridContainer>
       <Column>
+      <FormHeading>Broker</FormHeading>
         <Input type="text" placeholder="Broker Name" />
         <Input type="text" placeholder="Broker code" />
         <Input type="text" placeholder="Broker Cotact" />
@@ -72,13 +73,6 @@ const Column = styled.div`
     background-color: #d3d3d326;
 `;
 
-const FormHeading = styled.div`
-  font-family: 'Your UI Font', sans-serif; /* Replace 'Your UI Font' with the desired UI font */
-  font-size: 1.5rem; /* Adjust the font size as needed */
-  font-weight: bold;
-  color: black; /* Font color */
-  margin-bottom: 10px; /* Adjust the margin as needed */
-`;
 
 const ActionButtonsContainer = styled.div`
   display: grid;

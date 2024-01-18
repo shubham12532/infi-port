@@ -25,4 +25,11 @@ export const Button = styled.button`
   }
 `;
 
-// Other styled components can be exported here if needed
+export const FormHeading = styled.div`
+  font-family: 'Your UI Font', sans-serif; /* Replace 'Your UI Font' with the desired UI font */
+  font-size: 1.qrem; /* Adjust the font size as needed */
+  font-weight: bold;
+  color: black; /* Font color */
+  margin-bottom: 10px; /* Adjust the margin as needed */
+`;
+

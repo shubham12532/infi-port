@@ -8,6 +8,9 @@ import StaticDataFund from "./Screens/Fund/StaticDataFund";
 import Broker from "./Screens/Broker/Broker";
 import CounterParty from "./Screens/CounterParty/CounterParty";
 import LoginPage from "./Screens/login/LoginPage";
+import Custodian from "./Screens/Custodian/Custodian";
+import Exchange from "./Screens/Exchange/Exchange";
+import Country from "./Screens/Country/Country";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -40,7 +43,11 @@ function App() {
           <main className="content">
             <Topbar setSideBarOpen={openSideBar} />
             <Routes>
-              <Route path="/" element={<CounterParty />} />
+              <Route path="/fund" element={<StaticDataFund/>} />
+              <Route path="/Custodian" element={<Custodian/>} />  
+              <Route path="/broker" element={<Broker/>} />
+              <Route path="/exchange" element={<Exchange/>} />
+              <Route path="/country" element={<Country/>} />
             </Routes>
           </main>
         </div>
