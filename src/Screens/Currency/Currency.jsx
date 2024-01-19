@@ -1,12 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useState } from 'react';
+import { Input,Button,FormHeading } from '../../components/global/FormComponent';
+import { Form } from 'formik';
 
 const Currency = () => {
   return (
     <GridContainer>
       <Column>
-        <TitleContainer>Currency</TitleContainer>
+      <FormHeading>Currency</FormHeading>
         <Input type="text" placeholder="Country"/>
         <Input type="text" placeholder="Currency"/>
         <Input type="text" placeholder="Currency Code" />

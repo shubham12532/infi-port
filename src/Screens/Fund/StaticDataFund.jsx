@@ -14,6 +14,9 @@ const FormContainer = styled.div`
 
 const MenuContainer = styled.div`
   padding: 6px;
+  display: flex;
+  align-items: center; /* Align items vertically in the center */
+  gap: 10px; /* Adjust the gap between buttons as needed */
 `;
 
 

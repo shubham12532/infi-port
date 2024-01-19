@@ -1,12 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useState } from 'react';
+import { Button,Input,FormHeading } from '../../components/global/FormComponent';
 
 const Country = () => {
   return (
     <GridContainer>
       <Column>
-        <TitleContainer>Counterparty</TitleContainer>
+      <FormHeading>
+       Country
+      </FormHeading>
         <Input type="text" placeholder="Country Name" />
         <Input type="text" placeholder="Country Code" />
         <Input type="text" placeholder="Country Region" />
@@ -48,35 +51,6 @@ const ActionButtonsContainer = styled.div`
   grid-template-columns: repeat(5,1fr);
   gap: 10px;
   margin-top: 20px;
-`;
-
-const Button = styled.button`
-  width: 100%;
-  padding: 10px;
-  cursor: pointer;
-  border: 0;
-  background-color: #3498db;
-  color: #fff;
-
-  &:hover {
-    background-color: #2980b9;
-  }
-`;
-
-const TitleContainer = styled.div`
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 10px;
-  text-align: center;
-  color: black;
-  font-size: 20px;
-`;
-
-
-const Input = styled.input`
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 10px;
 `;
 
 export default Country;
