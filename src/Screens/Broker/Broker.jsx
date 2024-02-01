@@ -5,6 +5,7 @@ import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 import { Input,Button,FormHeading } from '../../components/global/FormComponent';
+import GridComponent from '../../components/global/GridComponent';
 
 const Broker = () => {
 
@@ -25,6 +26,7 @@ const Broker = () => {
     { id: 2, name: 'Jane Doe' },
     // Add more rows as needed
   ];
+
 
   return (
     <GridContainer>
@@ -49,7 +51,7 @@ const Broker = () => {
       </Column>
       <Column>
       <div className="ag-theme-alpine" style={{ height: 400, width: '100%' }}>
-        <AgGridReact
+        <GridComponent
           columnDefs={columnDefs}
           rowData={rowData}
         />

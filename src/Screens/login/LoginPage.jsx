@@ -116,17 +116,33 @@ function LoginPage({ onLoginSuccess }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    // Basic client-side validation
-    if (username === 'shubham@gmail.com' && password === 'pass123') {
-      alert('Login successful!');
-      onLoginSuccess();
-    } else {
-      alert('Invalid username or password');
-      // Optionally, you can clear the input fields on failed login
-      setUsername('');
-      setPassword('');
+
+    try {
+      const apiUrl = 'http://44.212.224.125:8080/Infiport/v1/login/user-login'; // Replace with your actual login API endpoint
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        body: JSON.stringify({
+          username: username,
+          password: password,
+          'keep-alive': 1
+        }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        alert('Login successful!');
+        onLoginSuccess();
+      } else {
+        alert('Invalid username or password');
+        // Optionally, you can clear the input fields on failed login
+        setUsername('');
+        setPassword('');
+      }
+    } catch (error) {
+      console.error('Error during login:', error);
+      alert('An error occurred during login. Please try again.');
     }
   };
 
